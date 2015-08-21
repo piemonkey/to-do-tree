@@ -14,6 +14,12 @@ if (Meteor.isServer) {
 if (Meteor.isClient) {
   Meteor.subscribe("tasks");
 
+  Template.body.helpers({
+    showLanding: function() {
+      return Session.get('userId') === undefined;
+    }
+  })
+
   Template.head.helpers({
     isOwner: function() {
       return Session.get('userId') === Meteor.userId();

@@ -5,7 +5,11 @@
 <body>
   <div class="container">
     {{> head}}
-    {{> todo}}
+    {{#if showLanding}}
+      {{> landing}}
+    {{else}}
+      {{> todo}}
+    {{/if}}
   </div>
 </body>
 
@@ -26,6 +30,12 @@
       </form>
     {{/if}}
   </header>
+</template>
+
+<template name="landing">
+  <div class="welcome">
+    Welcome.
+  </div>
 </template>
 
 <template name="todo">
