@@ -14,7 +14,16 @@ if (Meteor.isServer) {
 if (Meteor.isClient) {
   Meteor.subscribe("tasks");
 
-  Template.body.events({
+  Template.head.helpers({
+    isOwner: function() {
+      return Session.get('userId') === Meteor.userId();
+    },
+    hideCompleted: function () {
+      return Session.get("hideCompleted");
+    }
+  })
+
+  Template.head.events({
     "submit .new-task": function(event) {
       event.preventDefault();
       var text = event.target.text.value;
@@ -28,15 +37,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.head.helpers({
-    isOwner: function() {
-      return Session.get('userId') === Meteor.userId();
-    },
-    hideCompleted: function () {
-      return Session.get("hideCompleted");
-    }
-  })
-
   Template.todo.helpers({
     tasks: function() {
       if (Session.get("hideCompleted")) {
@@ -46,6 +46,12 @@ if (Meteor.isClient) {
         // Otherwise, return all of the tasks
         return Tasks.find({}, {sort: {createdAt: -1}});
       }
+    }
+  });
+
+  Template.task.helpers({
+    isOwner: function() {
+      return Session.get('userId') === Meteor.userId();
     }
   });
 
