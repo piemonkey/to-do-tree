@@ -3,8 +3,6 @@ FlowRouter.route('/', {
   action: function() {
     if (Meteor.user()) {
       FlowRouter.go('user-home', Meteor.userId());
-    } else {
-      
     }
   }
 })

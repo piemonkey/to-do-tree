@@ -16,7 +16,7 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     showLanding: function() {
-      return Session.get('userId') === undefined;
+      return (! Session.get('userId')) || Session.get('userId') === '';
     }
   })
 
