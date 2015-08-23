@@ -8,7 +8,7 @@
     {{#if showLanding}}
       {{> landing}}
     {{else}}
-      {{> todo}}
+      {{> lists}}
     {{/if}}
   </div>
 </body>
@@ -38,18 +38,21 @@
   </div>
 </template>
 
-<template name="todo">
-  <ul>
-    {{#each tasks}}
-      {{> task}}
-    {{/each}}
-  </ul>
+<template name="lists">
+  {{#each breadcrumbs}}
+    <ul>
+      {{#each tasks this}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  {{/each}}
 </template>
 
 <template name="task">
   <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
     {{#if isOwner}}
     <button class="delete">&times;</button>
+    <button class="expand">&gt;</button>
 
     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 

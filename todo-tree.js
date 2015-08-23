@@ -43,15 +43,19 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.todo.helpers({
-    tasks: function() {
-      if (Session.get("hideCompleted")) {
-        // If hide completed is checked, filter tasks
-        return Tasks.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
-      } else {
-        // Otherwise, return all of the tasks
-        return Tasks.find({}, {sort: {createdAt: -1}});
+  Template.lists.helpers({
+    breadcrumbs: function() {
+      return Session.get('breadcrumbs') || ['root'];
+    },
+    tasks: function(superTask) {
+      var constraints = {};
+      if(superTask) {
+        constraints.parent = superTask;
       }
+      if (Session.get("hideCompleted")) {
+        constraints.checked = {$ne: true};
+      }
+      return Tasks.find(constraints, {sort: {createdAt: -1}});
     }
   });
 
@@ -71,6 +75,11 @@ if (Meteor.isClient) {
     },
     "click .toggle-private": function() {
       Meteor.call("setPrivate", this._id, !this.private);
+    },
+    'click .expand': function() {
+      var crumbs = Session.get('breadcrumbs') || ['root'];
+      crumbs.push(this._id);
+      Session.set('breadcrumbs', crumbs);
     }
   });
 
