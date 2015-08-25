@@ -45,7 +45,7 @@ if (Meteor.isClient) {
 
   Template.lists.helpers({
     breadcrumbs: function() {
-      return Session.get('breadcrumbs') || ['root'];
+      return Session.get('breadcrumbs');
     },
     tasks: function(superTask) {
       var constraints = {};
@@ -60,6 +60,14 @@ if (Meteor.isClient) {
   });
 
   Template.task.helpers({
+    childpath: function(task) {
+      var newBreadcrumb = Session.get('breadcrumbs')
+      newBreadcrumb.push(task._id);
+      return FlowRouter.path('user-task', {
+        userId: Session.get('userId'),
+        breadcrumbs: newBreadcrumb.join('-')
+      });
+    },
     isOwner: function() {
       return Session.get('userId') === Meteor.userId();
     }
@@ -76,11 +84,6 @@ if (Meteor.isClient) {
     "click .toggle-private": function() {
       Meteor.call("setPrivate", this._id, !this.private);
     },
-    'click .expand': function() {
-      var crumbs = Session.get('breadcrumbs') || ['root'];
-      crumbs.push(this._id);
-      Session.set('breadcrumbs', crumbs);
-    }
   });
 
   Accounts.ui.config({

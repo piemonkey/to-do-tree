@@ -50,9 +50,9 @@
 
 <template name="task">
   <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <a href="{{childpath this}}">&gt;</a>
     {{#if isOwner}}
     <button class="delete">&times;</button>
-    <button class="expand">&gt;</button>
 
     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
