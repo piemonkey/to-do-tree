@@ -1,4 +1,10 @@
 Template.head.events({
+  "change .hide-completed input": function (event) {
+    Session.set("hideCompleted", event.target.checked);
+  }
+});
+
+Template.lists.events({
   "submit .new-task": function(event) {
     event.preventDefault();
     var text = event.target.text.value;
@@ -6,11 +12,8 @@ Template.head.events({
     Meteor.call("addTask", text);
 
     event.target.text.value = "";
-  },
-  "change .hide-completed input": function (event) {
-    Session.set("hideCompleted", event.target.checked);
   }
-});
+})
 
 Template.task.events({
   "click .toggle-checked": function () {

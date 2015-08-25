@@ -5,15 +5,15 @@ Template.body.helpers({
 })
 
 Template.head.helpers({
-  isOwner: function() {
-    return Session.get('userId') === Meteor.userId();
-  },
   hideCompleted: function () {
     return Session.get("hideCompleted");
   }
 })
 
 Template.lists.helpers({
+  isOwner: function() {
+    return Session.get('userId') === Meteor.userId();
+  },
   breadcrumbs: function() {
     return Session.get('breadcrumbs');
   },

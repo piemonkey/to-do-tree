@@ -23,12 +23,6 @@
     </label>
 
     {{> loginButtons}}
-
-    {{#if isOwner}}
-      <form class="new-task">
-        <input type="text" name="text" placeholder="Type to add new tasks" />
-      </form>
-    {{/if}}
   </header>
 </template>
 
@@ -40,6 +34,12 @@
 
 <template name="lists">
   {{#each breadcrumbs}}
+    {{#if isOwner}}
+      <form class="new-task">
+        <input type="text" name="text" placeholder="Type to add new tasks" />
+      </form>
+    {{/if}}
+
     <ul>
       {{#each tasks this}}
         {{> task}}
