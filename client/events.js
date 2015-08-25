@@ -9,7 +9,7 @@ Template.lists.events({
     event.preventDefault();
     var text = event.target.text.value;
 
-    Meteor.call("addTask", text);
+    Meteor.call("addTask", text, this.valueOf());
 
     event.target.text.value = "";
   }
