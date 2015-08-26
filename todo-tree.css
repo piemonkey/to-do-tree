@@ -17,7 +17,6 @@ body {
 }
 
 .container {
-  max-width: 600px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -42,15 +41,21 @@ h1 {
   margin-right: 1em;
 }
 
-form {
-  margin-top: 10px;
-  margin-bottom: -10px;
-  position: relative;
+.todo-lists {
+  display: flex;
+  justify-content: flex-end;
+  overflow-x: hidden;
+}
+
+.todo-list {
+  flex-grow: 1;
+  min-width: 400px;
 }
 
 .new-task input {
   box-sizing: border-box;
-  padding: 10px 0;
+  position: relative;
+  padding: 15px;
   background: transparent;
   border: none;
   width: 100%;
