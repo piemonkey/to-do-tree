@@ -42,13 +42,22 @@ h1 {
 }
 
 .todo-lists {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+         -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+          justify-content: flex-end;
   overflow-x: hidden;
 }
 
 .todo-list {
-  flex-grow: 1;
+   -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+          flex-grow: 1;
   min-width: 400px;
 }
 
