@@ -16,8 +16,7 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   addTask: function(text, parentId) {
-    //TODO Make sure checks for correct user when looking at privs
-    if (!Meteor.userId()) {
+    if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorised");
     }
     var parent;
@@ -49,18 +48,13 @@ Meteor.methods({
   },
   setPrivate: function(taskId, setToPrivate) {
     var task = Tasks.findOne(taskId);
-
-    if (task.owner !== Meteor.userId()) {
-      throw new Meteor.Error("not-authorised");
-    }
-
+    checkAuthorised(task);
     Tasks.update(taskId, { $set: {private: setToPrivate} });
   }
 });
 
-// TODO Re-examine priveleges
 function checkAuthorised(task) {
-  if (task.private && task.owner !== userId) {
+  if (task.owner !== Meteor.userId()) {
     throw new Meteor.Error("not-authorised");
   }
 }
