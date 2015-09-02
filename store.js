@@ -1,18 +1,17 @@
 Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isServer) {
-    Meteor.publish("tasks", function() {
+    Meteor.publish("tasks", function(userId) {
       return Tasks.find({
-        $or: [
-          { private: {$ne: true}},
-          { owner: this.userId }
+        $and: [
+          { owner: userId },
+          { $or: [
+            { private: {$ne: true}},
+            { owner: this.userId }
+          ]}
         ]
       });
     })
-}
-
-if (Meteor.isClient) {
-  Meteor.subscribe("tasks");
 }
 
 Meteor.methods({

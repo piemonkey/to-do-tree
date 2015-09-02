@@ -10,17 +10,19 @@ FlowRouter.route('/', {
 FlowRouter.route('/user/:userId', {
   name: 'user-home',
   action: function(params, queryParams) {
-    Session.set('userId', params.userId);
-    Session.set('breadcrumbs', ['root']);
+    todoRoute(params.userId, ['root']);
   }
 });
 
 FlowRouter.route("/user/:userId/:breadcrumbs", {
   name:'user-task',
   action: function(params, queryParams) {
-    Session.set('userId', params.userId);
-    var breadcrumbs = params.breadcrumbs.split('-');
-    // breadcrumbs.unshift('root');
-    Session.set('breadcrumbs', breadcrumbs);
+    todoRoute(params.userId, params.breadcrumbs.split('-'));
   }
 });
+
+var todoRoute = function(userId, breadcrumbs) {
+  Meteor.subscribe("tasks", userId);
+  Session.set('userId', userId);
+  Session.set('breadcrumbs', breadcrumbs);
+}
