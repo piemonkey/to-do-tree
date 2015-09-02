@@ -1,8 +1,13 @@
 FlowRouter.route('/', {
   name: 'landing',
   action: function() {
-    if (Meteor.user()) {
-      FlowRouter.go('user-home', Meteor.userId());
+    if (Meteor.userId()) {
+      FlowRouter.go('user-home', {userId: Meteor.userId()});
+    } else {
+      var loginRedirect = Accounts.onLogin(function() {
+         FlowRouter.go('user-home', {userId: Meteor.userId()});
+         loginRedirect.stop();
+      });
     }
   }
 })
