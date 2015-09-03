@@ -54,7 +54,7 @@
 
 <template name="task">
   <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
-    <a href="{{childpath this}}">&gt;</a>
+    <a href="{{childpath this}}"><button class="show-children">&gt;</button></a>
     {{#if isOwner}}
     <button class="delete">&times;</button>
 
