@@ -100,7 +100,7 @@ li .toggle-checked {
   margin-left: 12px;
 }
 
-li .toggle-private {
+li .toggle-public {
   margin-left: 5px;
 }
 
@@ -133,7 +133,7 @@ li.checked .text {
   text-decoration: line-through;
 }
 
-li.private {
+li.public {
   padding: 0px;
   border: #ddd solid 15px;
 }

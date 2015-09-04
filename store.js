@@ -6,7 +6,7 @@ if (Meteor.isServer) {
         $and: [
           { owner: userId },
           { $or: [
-            { private: {$ne: true}},
+            { public: {$eq: true}},
             { owner: this.userId }
           ]}
         ]
@@ -46,10 +46,10 @@ Meteor.methods({
     checkAuthorised(task);
     Tasks.update(taskId, { $set: {checked: setChecked} });
   },
-  setPrivate: function(taskId, setToPrivate) {
+  setPublic: function(taskId, setToPublic) {
     var task = Tasks.findOne(taskId);
     checkAuthorised(task);
-    Tasks.update(taskId, { $set: {private: setToPrivate} });
+    Tasks.update(taskId, { $set: {public: setToPublic} });
   }
 });
 

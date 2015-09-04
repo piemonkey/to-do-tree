@@ -53,18 +53,18 @@
 </template>
 
 <template name="task">
-  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}} {{#if expanded}}expanded{{/if}}">
+  <li class="{{#if checked}}checked{{/if}} {{#if public}}public{{/if}} {{#if expanded}}expanded{{/if}}">
     <a href="{{childpath}}"><button class="show-children">&gt;</button></a>
     {{#if isOwner}}
     <button class="delete">&times;</button>
 
     <input id="toggle-checked" type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
-      <button class="toggle-private">
-        {{#if private}}
-          Private
-        {{else}}
+      <button class="toggle-public">
+        {{#if public}}
           Public
+        {{else}}
+          Private
         {{/if}}
       </button>
     {{/if}}
