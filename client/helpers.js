@@ -30,11 +30,11 @@ Template.lists.helpers({
 });
 
 Template.task.helpers({
-  childpath: function(task) {
+  childpath: function() {
     var newBreadcrumb = Session.get('breadcrumbs');
-    var breadcrumbStubIndex = newBreadcrumb.lastIndexOf(task.parent) + 1;
+    var breadcrumbStubIndex = newBreadcrumb.lastIndexOf(this.parent) + 1;
     newBreadcrumb = newBreadcrumb.slice(0, breadcrumbStubIndex);
-    newBreadcrumb.push(task._id);
+    newBreadcrumb.push(this._id);
     return FlowRouter.path('user-task', {
       userId: Session.get('userId'),
       breadcrumbs: newBreadcrumb.join('-')
@@ -42,5 +42,8 @@ Template.task.helpers({
   },
   isOwner: function() {
     return Session.get('userId') === Meteor.userId();
+  },
+  expanded: function() {
+    return Session.get('breadcrumbs').indexOf(this._id) !== -1;
   }
 });

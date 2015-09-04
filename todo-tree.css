@@ -15,7 +15,6 @@ body {
   left: 0;
   right: 0;
 
-  padding: 0;
   margin: 0;
 
   font-size: 14px;
@@ -97,11 +96,19 @@ li {
   border: #eee solid 1px;
 }
 
+li .toggle-checked {
+  margin-left: 12px;
+}
+
+li .toggle-private {
+  margin-left: 5px;
+}
+
 li .show-children {
   float: right;
   font-weight: bold;
-  background: none;
-  border: none;
+  background-color: transparent;
+  border-color: transparent;
   margin-right: 6px;
   margin-left: 6px;
 }
@@ -109,8 +116,8 @@ li .show-children {
 li .delete {
   float: right;
   font-weight: bold;
-  background: none;
-  border: none;
+  background-color: transparent;
+  border-color: transparent;
   position: relative;
 }
 
@@ -127,29 +134,14 @@ li.checked .text {
 }
 
 li.private {
+  padding: 0px;
+  border: #ddd solid 15px;
+}
+
+li.expanded {
   background: #eee;
-  border-color: #ddd;
 }
 
 header .hide-completed {
   float: right;
-}
-
-.toggle-private {
-  margin-left: 5px;
-}
-
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
-
-  .search {
-    width: 150px;
-    clear: both;
-  }
-
-  .new-task input {
-    padding-bottom: 5px;
-  }
 }
