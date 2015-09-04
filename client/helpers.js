@@ -60,13 +60,15 @@ Template.lists.helpers({
 
 Template.task.helpers({
   childpath: function() {
-    var newBreadcrumb = Session.get('breadcrumbs');
-    var breadcrumbStubIndex = newBreadcrumb.lastIndexOf(this.parent) + 1;
-    newBreadcrumb = newBreadcrumb.slice(0, breadcrumbStubIndex);
-    newBreadcrumb.push(this._id);
+    var oldBreadcrumbs = Session.get('breadcrumbs');
+    var breadcrumbStubIndex = oldBreadcrumbs.lastIndexOf(this.parent) + 1;
+    var newBreadcrumbs = oldBreadcrumbs.slice(0, breadcrumbStubIndex);
+    if (! (oldBreadcrumbs[breadcrumbStubIndex] === this._id)) {
+      newBreadcrumbs.push(this._id);
+    }
     return FlowRouter.path('user-task', {
       user: Session.get('user'),
-      breadcrumbs: newBreadcrumb.join('-')
+      breadcrumbs: newBreadcrumbs.join('-')
     });
   },
   isOwner: function() {

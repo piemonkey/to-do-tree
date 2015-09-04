@@ -54,7 +54,7 @@
 
 <template name="task">
   <li class="{{#if complete}}complete{{/if}} {{#if public}}public{{/if}} {{#if expanded}}expanded{{/if}}">
-    <a href="{{childpath}}"><button class="show-children">&gt;</button></a>
+    <a href="{{childpath}}"><button class="show-children">{{#if expanded}}&lt;{{else}}&gt;{{/if}}</button></a>
     {{#if isOwner}}
     <button class="delete">&times;</button>
 
