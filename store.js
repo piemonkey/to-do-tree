@@ -1,10 +1,11 @@
 Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isServer) {
-    Meteor.publish("tasks", function(userId) {
+    Meteor.publish("tasks", function(owner) {
+      var ownerId = Meteor.users.findOne({ username : owner}, { _id : 1 })._id;
       return Tasks.find({
         $and: [
-          { owner: userId },
+          { owner: ownerId },
           { $or: [
             { public: {$eq: true}},
             { owner: this.userId }

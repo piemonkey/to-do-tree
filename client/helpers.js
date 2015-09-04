@@ -1,6 +1,6 @@
 Template.body.helpers({
   showLanding: function() {
-    return (! Session.get('userId')) || Session.get('userId') === '';
+    return (! Session.get('user')) || Session.get('user') === '';
   }
 })
 
@@ -12,7 +12,11 @@ Template.head.helpers({
 
 Template.lists.helpers({
   isOwner: function() {
-    return Session.get('userId') === Meteor.userId();
+    var owner = false;
+    if (Meteor.user()) {
+      owner = Session.get('user') === Meteor.user().username;
+    }
+    return owner;
   },
   breadcrumbs: function() {
     return Session.get('breadcrumbs');
@@ -56,12 +60,12 @@ Template.task.helpers({
     newBreadcrumb = newBreadcrumb.slice(0, breadcrumbStubIndex);
     newBreadcrumb.push(this._id);
     return FlowRouter.path('user-task', {
-      userId: Session.get('userId'),
+      user: Session.get('user'),
       breadcrumbs: newBreadcrumb.join('-')
     });
   },
   isOwner: function() {
-    return Session.get('userId') === Meteor.userId();
+    return Session.get('user') === Meteor.user().username;
   },
   expanded: function() {
     return Session.get('breadcrumbs').indexOf(this._id) !== -1;

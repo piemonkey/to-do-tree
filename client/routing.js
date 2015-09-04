@@ -4,28 +4,28 @@ FlowRouter.route('/', {
     var loginRedirect = Deps.autorun( function() {
       if (Meteor.user()) {
         loginRedirect.stop();
-        FlowRouter.go('user-home', {userId: Meteor.user()._id});
+        FlowRouter.go('user-home', {user: Meteor.user().username});
       }
     })
   }
 })
 
-FlowRouter.route('/user/:userId', {
+FlowRouter.route('/user/:user', {
   name: 'user-home',
   action: function(params, queryParams) {
-    todoRoute(params.userId, ['root']);
+    todoRoute(params.user, ['root']);
   }
 });
 
-FlowRouter.route("/user/:userId/:breadcrumbs", {
+FlowRouter.route("/user/:user/:breadcrumbs", {
   name:'user-task',
   action: function(params, queryParams) {
-    todoRoute(params.userId, params.breadcrumbs.split('-'));
+    todoRoute(params.user, params.breadcrumbs.split('-'));
   }
 });
 
-var todoRoute = function(userId, breadcrumbs) {
-  Meteor.subscribe("tasks", userId);
-  Session.set('userId', userId);
+var todoRoute = function(user, breadcrumbs) {
+  Meteor.subscribe("tasks", user);
+  Session.set('user', user);
   Session.set('breadcrumbs', breadcrumbs);
 }
