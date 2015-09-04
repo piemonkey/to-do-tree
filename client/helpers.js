@@ -26,7 +26,7 @@ Template.lists.helpers({
     if (Session.get("hideCompleted")) {
       constraints.complete = {$ne: true};
     }
-    var all = Tasks.find(constraints, {sort: {createdAt: -1}});
+    var all = Tasks.find(constraints);
     var counts = {};
     var currentList = [];
     all.forEach(function(task) {
@@ -49,6 +49,13 @@ Template.lists.helpers({
         task.unfinishedChildren = counts[task._id].unfinishedChildren;
       }
     });
+    currentList.sort(function(a, b) {
+      if (a.complete) {
+        return b.complete ? a.text.localeCompare(b.text) : 1;
+      } else {
+        return b.complete ? -1 : a.text.localeCompare(b.text);
+      }
+    })
     return currentList;
   }
 });
