@@ -1,14 +1,12 @@
 FlowRouter.route('/', {
   name: 'landing',
   action: function() {
-    if (Meteor.userId()) {
-      FlowRouter.go('user-home', {userId: Meteor.userId()});
-    } else {
-      var loginRedirect = Accounts.onLogin(function() {
-         FlowRouter.go('user-home', {userId: Meteor.userId()});
-         loginRedirect.stop();
-      });
-    }
+    var loginRedirect = Deps.autorun( function() {
+      if (Meteor.user()) {
+        loginRedirect.stop();
+        FlowRouter.go('user-home', {userId: Meteor.user()._id});
+      }
+    })
   }
 })
 
