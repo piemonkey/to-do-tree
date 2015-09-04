@@ -22,16 +22,14 @@ Template.lists.helpers({
     return Session.get('breadcrumbs');
   },
   tasks: function(superTask) {
-    var constraints = {};
-    if (Session.get("hideCompleted")) {
-      constraints.complete = {$ne: true};
-    }
-    var all = Tasks.find(constraints);
+    var all = Tasks.find();
     var counts = {};
     var currentList = [];
     all.forEach(function(task) {
       if (task.parent === superTask) {
-        currentList.push(task);
+        if (! (Session.get("hideCompleted") && task.complete) ) {
+          currentList.push(task);
+        }
       } else {
         if (counts[task.parent]) {
           counts[task.parent].children++;

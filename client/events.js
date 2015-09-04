@@ -1,6 +1,6 @@
 Template.head.events({
   "change .hide-completed input": function (event) {
-    Session.set("hideCompleted", event.target.complete);
+    Session.set("hideCompleted", event.target.checked);
   }
 });
 
