@@ -96,7 +96,7 @@ li {
   border: #eee solid 1px;
 }
 
-li .toggle-checked {
+li .toggle-complete {
   margin-left: 12px;
 }
 
@@ -125,11 +125,11 @@ li .text {
   margin-left: 10px;
 }
 
-li.checked {
+li.complete {
   color: #888;
 }
 
-li.checked .text {
+li.complete .text {
   text-decoration: line-through;
 }
 

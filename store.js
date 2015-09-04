@@ -41,10 +41,10 @@ Meteor.methods({
     checkAuthorised(task);
     Tasks.remove(taskId);
   },
-  setChecked: function(taskId, setChecked) {
+  setComplete: function(taskId, setComplete) {
     var task = Tasks.findOne(taskId);
     checkAuthorised(task);
-    Tasks.update(taskId, { $set: {checked: setChecked} });
+    Tasks.update(taskId, { $set: {complete: setComplete} });
   },
   setPublic: function(taskId, setToPublic) {
     var task = Tasks.findOne(taskId);

@@ -19,13 +19,33 @@ Template.lists.helpers({
   },
   tasks: function(superTask) {
     var constraints = {};
-    if(superTask) {
-      constraints.parent = superTask;
-    }
     if (Session.get("hideCompleted")) {
-      constraints.checked = {$ne: true};
+      constraints.complete = {$ne: true};
     }
-    return Tasks.find(constraints, {sort: {createdAt: -1}});
+    var all = Tasks.find(constraints, {sort: {createdAt: -1}});
+    var counts = {};
+    var currentList = [];
+    all.forEach(function(task) {
+      if (task.parent === superTask) {
+        currentList.push(task);
+      } else {
+        if (counts[task.parent]) {
+          counts[task.parent].children++;
+          task.complete || counts[task.parent].unfinishedChildren++;
+        } else {
+          counts[task.parent] = {};
+          counts[task.parent].children = 1;
+          counts[task.parent].unfinishedChildren = task.complete ? 0 : 1;
+        }
+      }
+    });
+    currentList.forEach(function (task) {
+      if (counts[task._id]) {
+        task.children = counts[task._id].children;
+        task.unfinishedChildren = counts[task._id].unfinishedChildren;
+      }
+    });
+    return currentList;
   }
 });
 

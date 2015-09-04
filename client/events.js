@@ -1,6 +1,6 @@
 Template.head.events({
   "change .hide-completed input": function (event) {
-    Session.set("hideCompleted", event.target.checked);
+    Session.set("hideCompleted", event.target.complete);
   }
 });
 
@@ -16,9 +16,9 @@ Template.lists.events({
 })
 
 Template.task.events({
-  "click .toggle-checked": function () {
-    // Set the checked property to the opposite of its current value
-    Meteor.call("setChecked", this._id, !this.checked);
+  "click .toggle-complete": function () {
+    // Set the complete property to the opposite of its current value
+    Meteor.call("setComplete", this._id, !this.complete);
   },
   "click .delete": function () {
     Meteor.call("deleteTask", this._id);
