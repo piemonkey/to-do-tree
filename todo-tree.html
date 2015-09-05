@@ -54,11 +54,16 @@
 
 <template name="task">
   <li class="{{#if complete}}complete{{/if}} {{#if public}}public{{/if}} {{#if expanded}}expanded{{/if}}">
-    <a href="{{childpath}}"><button class="show-children">{{#if expanded}}&lt;{{else}}&gt;{{/if}}</button></a>
+    <a href="{{childpath}}">
+      <button class="show-children">
+        {{#if expanded}}&lt;{{else}}&gt;{{/if}}
+      </button>
+    </a>
     {{#if isOwner}}
-    <button class="delete">&times;</button>
+      <button class="delete">&times;</button>
 
-    <input id="toggle-complete" type="checkbox" checked="{{complete}}" class="toggle-complete" />
+      <input id="toggle-complete" type="checkbox" checked="{{complete}}"
+            class="toggle-complete" />
 
       <button class="toggle-public">
         {{#if public}}
@@ -69,6 +74,8 @@
       </button>
     {{/if}}
 
-    <span class="text">{{text}}{{#if children}} ({{unfinishedChildren}}/{{children}}){{/if}}</span>
+    <span class="text">
+      {{text}}{{#if children}} ({{unfinishedChildren}}/{{children}}){{/if}}
+    </span>
   </li>
 </template>
