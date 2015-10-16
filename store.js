@@ -7,7 +7,7 @@ if (Meteor.isServer) {
       $and: [
         { owner: ownerId },
         { $or: [
-          { public: {$eq: true}},
+          { public: true },
           { owner: this.userId }
         ]}
       ]
