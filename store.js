@@ -20,14 +20,7 @@ Meteor.methods({
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorised");
     }
-    var parent;
-    if (parentId != 'root') {
-      parent = Tasks.findOne(parentId);
-      if (! parent) {
-        new Meteor.Error('Parent task ' + parentId + ' does not exist');
-      }
-      checkAuthorised(parent);
-    }
+    checkParentValid(parentId);
 
     Tasks.insert({
       text: text,
@@ -36,6 +29,12 @@ Meteor.methods({
       username: Meteor.user().username,
       parent: parentId
     });
+  },
+  updateTask: function(task, updates) {
+    checkAuthorised(task);
+    checkParentValid(task.parent);
+
+    Tasks.update({_id: task._id}, {$set: updates});
   },
   deleteTask: function(taskId) {
     var task = Tasks.findOne(taskId);
@@ -53,6 +52,17 @@ Meteor.methods({
     Tasks.update(taskId, { $set: {public: setToPublic} });
   }
 });
+
+function checkParentValid(parentId) {
+  var parent;
+  if (parentId != 'root') {
+    parent = Tasks.findOne(parentId);
+    if (! parent) {
+      new Meteor.Error('Parent task ' + parentId + ' does not exist');
+    }
+    checkAuthorised(parent);
+  }
+}
 
 function checkAuthorised(task) {
   if (task.owner !== Meteor.userId()) {

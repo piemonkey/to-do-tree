@@ -35,14 +35,14 @@
 <template name="lists">
   <div class="todo-lists">
     {{#each breadcrumbs}}
-      <div class="todo-list">
+      <div class="todo-list-section">
         {{#if isOwner}}
           <form class="new-task">
             <input type="text" name="text" placeholder="Type to add new tasks" />
           </form>
         {{/if}}
 
-        <ul>
+        <ul class="todo-list">
           {{#each tasks this}}
             {{> task}}
           {{/each}}
