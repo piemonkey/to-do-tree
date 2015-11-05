@@ -1,4 +1,4 @@
-Template.lists.rendered = function() {
+Template.list.rendered = function() {
   this.$('.todo-list').sortable({
     // config
     connectWith: '.todo-list',

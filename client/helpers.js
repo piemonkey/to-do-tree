@@ -20,7 +20,10 @@ Template.lists.helpers({
   },
   breadcrumbs: function() {
     return Session.get('breadcrumbs');
-  },
+  }
+})
+
+Template.list.helpers({
   tasks: function(superTask) {
     var all = Tasks.find();
     var counts = {};

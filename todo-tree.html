@@ -42,14 +42,18 @@
           </form>
         {{/if}}
 
-        <ul class="todo-list">
-          {{#each tasks this}}
-            {{> task}}
-          {{/each}}
-        </ul>
+        {{> list}}
       </div>
     {{/each}}
   </div>
+</template>
+
+<template name="list">
+  <ul class="todo-list">
+    {{#each tasks this}}
+      {{> task}}
+    {{/each}}
+  </ul>
 </template>
 
 <template name="task">
