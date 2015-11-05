@@ -15,6 +15,10 @@ Template.lists.rendered = function() {
         updates.parent = Blaze.getData(parent);
         task.parentId = updates.parent;
       }
+      var beforeOrder = before == null ? 0 : Blaze.getData(before).sortOrder;
+      var afterOrder = after == null ? beforeOrder + 20 : Blaze.getData(after).sortOrder;
+      updates.sortOrder = (afterOrder - beforeOrder) / 2 + beforeOrder;
+      task.sortOrder = updates.sortOrder;
 
       if (Object.keys(updates).length != 0) {
         Meteor.call('updateTask', task, updates);

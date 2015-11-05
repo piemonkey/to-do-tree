@@ -48,11 +48,7 @@ Template.lists.helpers({
       }
     });
     currentList.sort(function(a, b) {
-      if (a.complete) {
-        return b.complete ? a.text.localeCompare(b.text) : 1;
-      } else {
-        return b.complete ? -1 : a.text.localeCompare(b.text);
-      }
+      return a.sortOrder - b.sortOrder;
     })
     return currentList;
   }

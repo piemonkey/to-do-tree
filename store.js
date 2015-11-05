@@ -22,12 +22,25 @@ Meteor.methods({
     }
     checkParentValid(parentId);
 
+    var highestSortOrder = 0
+    Tasks.find({
+      $and: [
+        { owner: Meteor.userId() },
+        { parent: parentId }
+      ]
+    }, { fields: {sortOrder: 1}}).forEach(function(task) {
+      if (highestSortOrder < task.sortOrder) {
+        (highestSortOrder = task.sortOrder);
+      }
+    });
+
     Tasks.insert({
       text: text,
       createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username,
-      parent: parentId
+      parent: parentId,
+      sortOrder: highestSortOrder + 10
     });
   },
   updateTask: function(task, updates) {
