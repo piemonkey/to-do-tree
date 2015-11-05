@@ -1,25 +1,24 @@
 FlowRouter.route('/', {
   name: 'home',
   action: function() {
-    var loginRedirect = Deps.autorun( function() {
-      if (Meteor.user()) {
-        todoRoute(Meteor.user().username, ['root'])
-      }
-    })
+    todoRoute(['root'])
   }
 })
 
 FlowRouter.route("/:breadcrumbs", {
-  name:'user-task',
+  name:'task',
   action: function(params, queryParams) {
-    if (Meteor.user()) {
-      todoRoute(Meteor.user().username, params.breadcrumbs.split('-'))
-    }
+    todoRoute(params.breadcrumbs.split('-'))
   }
 });
 
-var todoRoute = function(user, breadcrumbs) {
-  Meteor.subscribe("tasks", user)
-  Session.set('user', user)
-  Session.set('breadcrumbs', breadcrumbs)
+var todoRoute = function(breadcrumbs) {
+  var loginRedirect = Deps.autorun(function() {
+    if (Meteor.user()) {
+      // loginRedirect.stop() TODO uncomment when removed session user
+      Meteor.subscribe("tasks", Meteor.userId())
+      Session.set('user', Meteor.user().username)
+      Session.set('breadcrumbs', breadcrumbs)
+    }
+  })
 }

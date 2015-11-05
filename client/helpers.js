@@ -59,9 +59,8 @@ Template.task.helpers({
     if (! (oldBreadcrumbs[breadcrumbStubIndex] === this._id)) {
       newBreadcrumbs.push(this._id);
     }
-    return FlowRouter.path('user-task', {
-      user: Session.get('user'),
-      breadcrumbs: newBreadcrumbs.join('-')
+    return FlowRouter.path('task', {
+      breadcrumbs: newBreadcrumbs.join('-'),
     });
   },
   isOwner: function() {
