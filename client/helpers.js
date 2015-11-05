@@ -1,9 +1,3 @@
-Template.body.helpers({
-  showLanding: function() {
-    return (! Session.get('user')) || Session.get('user') === '';
-  }
-})
-
 Template.head.helpers({
   hideCompleted: function () {
     return Session.get("hideCompleted");

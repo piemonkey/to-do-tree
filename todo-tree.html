@@ -5,10 +5,10 @@
 <body>
   <div class="container">
     {{> head}}
-    {{#if showLanding}}
-      {{> landing}}
-    {{else}}
+    {{#if currentUser}}
       {{> lists}}
+    {{else}}
+      {{> landing}}
     {{/if}}
   </div>
 </body>
