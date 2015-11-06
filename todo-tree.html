@@ -36,11 +36,9 @@
   <div class="todo-lists">
     {{#each breadcrumbs}}
       <div class="todo-list-section">
-        {{#if isOwner}}
-          <form class="new-task">
-            <input type="text" name="text" placeholder="Type to add new tasks" />
-          </form>
-        {{/if}}
+        <form class="new-task">
+          <input type="text" name="text" placeholder="Type to add new tasks" />
+        </form>
 
         {{> list}}
       </div>
@@ -57,26 +55,16 @@
 </template>
 
 <template name="task">
-  <li class="{{#if complete}}complete{{/if}} {{#if public}}public{{/if}} {{#if expanded}}expanded{{/if}}">
+  <li class="{{#if complete}}complete{{/if}} {{#if expanded}}expanded{{/if}}">
     <a href="{{childpath}}">
       <button class="show-children">
         {{#if expanded}}&lt;{{else}}&gt;{{/if}}
       </button>
     </a>
-    {{#if isOwner}}
-      <button class="delete">&times;</button>
+    <button class="delete">&times;</button>
 
-      <input id="toggle-complete" type="checkbox" checked="{{complete}}"
-            class="toggle-complete" />
-
-      <button class="toggle-public">
-        {{#if public}}
-          Public
-        {{else}}
-          Private
-        {{/if}}
-      </button>
-    {{/if}}
+    <input id="toggle-complete" type="checkbox" checked="{{complete}}"
+          class="toggle-complete" />
 
     <span class="text">
       {{text}}{{#if children}} ({{unfinishedChildren}}/{{children}}){{/if}}
