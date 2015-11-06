@@ -54,11 +54,6 @@ Meteor.methods({
     checkAuthorised(task);
     Tasks.update(taskId, { $set: {complete: setComplete} });
   },
-  setPublic: function(taskId, setToPublic) {
-    var task = Tasks.findOne(taskId);
-    checkAuthorised(task);
-    Tasks.update(taskId, { $set: {public: setToPublic} });
-  }
 });
 
 function checkParentValid(parentId) {

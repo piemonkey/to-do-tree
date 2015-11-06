@@ -23,7 +23,4 @@ Template.task.events({
   "click .delete": function () {
     Meteor.call("deleteTask", this._id);
   },
-  "click .toggle-public": function() {
-    Meteor.call("setPublic", this._id, !this.public);
-  },
 });

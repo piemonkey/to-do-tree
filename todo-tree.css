@@ -96,10 +96,6 @@ li .toggle-complete {
   margin-left: 12px;
 }
 
-li .toggle-public {
-  margin-left: 5px;
-}
-
 li .show-children {
   float: right;
   font-weight: bold;
@@ -127,11 +123,6 @@ li.complete {
 
 li.complete .text {
   text-decoration: line-through;
-}
-
-li.public {
-  padding: 0px;
-  border: #ddd solid 15px;
 }
 
 li.expanded {

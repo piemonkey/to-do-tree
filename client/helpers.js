@@ -5,13 +5,6 @@ Template.head.helpers({
 })
 
 Template.lists.helpers({
-  isOwner: function() {
-    var owner = false;
-    if (Meteor.user()) {
-      owner = Session.get('user') === Meteor.user().username;
-    }
-    return owner;
-  },
   breadcrumbs: function() {
     return Session.get('breadcrumbs');
   }
@@ -62,9 +55,6 @@ Template.task.helpers({
     return FlowRouter.path('task', {
       breadcrumbs: newBreadcrumbs.join('-'),
     });
-  },
-  isOwner: function() {
-    return Session.get('user') === Meteor.user().username;
   },
   expanded: function() {
     return Session.get('breadcrumbs').indexOf(this._id) !== -1;
